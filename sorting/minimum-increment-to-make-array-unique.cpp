@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int minIncrementForUnique(vector<int>& nums) {
+        int ans = 0;
+
+        ranges::sort(nums);
+
+        for(int i = 1; i<nums.size(); ++i){
+            if(nums[i] <= nums[i-1]){
+                ans+= ( abs(nums[i-1] - nums[i]) + 1 );
+                nums[i] = nums[i-1]+1;
+            }
+        }
+
+        return ans;
+    }
+};
