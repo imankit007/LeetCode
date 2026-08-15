@@ -1,28 +1,26 @@
 class Solution {
 public:
     int longestSubsequence(vector<int>& nums) {
-        
+
         const int n = nums.size();
 
-        int left = 0 ; 
-
-        int ans = 0; 
-
         int curr = 0;
-
-        for(int right = 0; right < n ; right++ ){
-
-            curr ^= nums[right];
-            if(curr != 0){
-                ans = max(ans, right - left + 1);
+        bool zero = true;
+        for (const int &n : nums) {
+            if (n != 0) {
+                zero = false;
             }
-
-            while(curr == 0 && left < right){
-                curr ^= nums[left++];
-            }
+            curr ^= n;
         }
 
-        return ans;
+        if (zero) {
+            return 0;
+        }
 
+        if (curr) {
+            return n;
+        }
+
+        return n - 1;
     }
 };
